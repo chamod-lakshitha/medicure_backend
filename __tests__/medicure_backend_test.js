@@ -32,3 +32,34 @@ describe('user login with valid email and password', () => {
     expect(res.body.userID).toEqual(2);
   });
 });
+
+describe('user login with valid email and password', () => {
+  it('user should be able to login', async () => {
+    const res = await request(app)
+      .post('/api/user/login')
+      .send({ email: 'test2@gmail.com', password: '123' });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.success).toEqual(true);
+    expect(res.body.userID).toEqual(7);
+  });
+});
+
+describe('user login with invalid email and password', () => {
+  it('user should not be able to login', async () => {
+    const res = await request(app)
+      .post('/api/user/login')
+      .send({ email: 'invalid@gmail.com', password: '123456' });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.success).toEqual(false);
+  });
+});
+
+describe('user login with invalid email and password', () => {
+  it('user should not be able to login', async () => {
+    const res = await request(app)
+      .post('/api/user/login')
+      .send({ email: 'invalid2@gmail.com', password: '123456' });
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.success).toEqual(false);
+  });
+});
