@@ -40,7 +40,7 @@ exports.predict = (req, res) => {
   }
 };
 
-xports.history = (req, res) => {
+exports.history = (req, res) => {
   PredictionModel.history(req.body.userID, (err, dbRes) => {
     if (err) {
       res.send({ success: false });
