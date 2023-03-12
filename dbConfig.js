@@ -22,7 +22,10 @@ function handleDisconnect() {
 
   dbConn.on('error', function (err) {
     console.log('db error', err);
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+    if (
+      (err.code === 'PROTOCOL_CONNECTION_LOST') |
+      (err.code === 'ETIMEDOUT')
+    ) {
       handleDisconnect();
     } else {
       throw err;
